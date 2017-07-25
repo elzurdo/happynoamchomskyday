@@ -133,3 +133,34 @@ def name2wikibdate(first, last, verbose=False):
         print url
     r = requests.get(url)
     return wiki_parse_bdate(r.content, verbose=verbose)
+
+
+def names2calendar(credentials, names, cal_name=None, cal_id=None, 
+	interval=5, freq='YEARLY', summary = "Happy %s %s Day!", verbose=False):
+
+	cal = Calendar(credentials)
+	if not cal_id:
+		# need to check if calendar exists ....
+		if not cal_name:
+			raise ValueError("Since `cal_id` is not given `cal_name` needs to be set")
+		if verbose:
+			print "Creating {} calendar".format(cal_name)
+		
+		
+		cal_id = cal.create_cal(summary=cal_name)
+
+	# Pulling birth days from Wikipedia
+	l_events = []
+	for name in names:
+	    bday = name2wikibdate(name[0], name[1])
+	    summary_temp = summary%(name[0], name[1])
+
+	    # creating an event
+	    event = {'summary': summary_temp, 'dateStart': bday, 'freq':freq, 'interval':interval}
+	    l_events.append(event)
+
+	# Adding all events to calendar
+	cal.add_events(cal_id, l_events)
+
+	return cal, cal_id
+
