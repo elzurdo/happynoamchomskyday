@@ -1,18 +1,19 @@
+import os
+
 import requests
 import httplib2
-from apiclient import discovery
+from googleapiclient import discovery
 
-SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-path = '/Users/ekazin/Personal/projects/happynoamchomskyday/happynoamchomskyday/aux/'
-CLIENT_SECRET_FILE = '{}client_secret_chomsky.json'.format(path)
-APPLICATION_NAME = 'Noam Chomsky day'
-
-import os
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+path = '{}/aux/'.format(os.getcwd())
+CLIENT_SECRET_FILE = '{}client_secret_chomsky.json'.format(path)
+APPLICATION_NAME = 'Noam Chomsky day'
 
 def set_credentials():
 	try:
