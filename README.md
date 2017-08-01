@@ -6,12 +6,15 @@ Create and personalise a Google Calendar
 
 Save birthdays of known (Wikipedia worthy) people as events in your Google Calendar. 
 
-It as easy as:
+It's as easy as:
 
 ```
-from happynoamchomskyday import chomsky
-credentials = chomsky.get_credentials()
-l_names = [("Christopher", "Nolan"), ("Noam", "Chomsky"), ("Alexander", "Hamilton"), ("Michael", "Jordan")]
+from happynoamchomskyday import chomsky  
+
+credentials = chomsky.get_credentials()  
+
+l_names = [("Christopher", "Nolan"), ("Noam", "Chomsky"), ("Alexander", "Hamilton"), ("Michael", "Jordan")]  
+
 cal, cal_id = chomsky.names2calendar(credentials, l_names, cal_name='favs_birthdays')
 ```
 
