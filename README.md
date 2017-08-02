@@ -20,6 +20,9 @@ cal, cal_id = chomsky.names2calendar(credentials, l_names, cal_name='favs_birthd
 
 We will make this more flexible in the future. (E.g, pushing your own dictionary of events and pulling from Google Sheets) 
 
+# Support 
+python 2.7    
+We will update to python 3 in the near future. 
 
 # Setup
 The usual:
@@ -33,15 +36,16 @@ python setup.py develop
 
 ## Setup credentials  
 The Google Calendars requires authentication. 
+In a python kernal do:  
 ```
 from happynoamchomskyday import chomsky  
 chomsky.set_credentials()
 ```
-(Best to do in python kernal, as I find that within Jupyter notebook the path is incorrect)
+(Best to run this in the kernel, as Jupyter notebook currently refers to the wrong path)
 
 This will:  
 1. Prompt the standard Google authorization  
-2. Set your credential file `~./credentials/chomsky.json`   
+2. Create the necessary credential file `~./credentials/chomsky.json`   
     
 
 # Usage
@@ -53,7 +57,7 @@ Get your creds:
 ```
 credentials = chomsky.get_credentials()
 ```
-Create a list of Wikipedia worthy paper (we obtain birthdates from Wikipedia, at the moment)  
+Create a list of Wikipedia worthy people (we obtain birthdates from Wikipedia, at the moment)  
 ```
 l_names = [("Christopher", "Nolan"), ("Noam", "Chomsky"), ("Alexander", "Hamilton"), ("Michael", "Jordan")]
 ```
@@ -65,4 +69,21 @@ are not set up for yet.
 ```
 cal, cal_id = chomsky.names2calendar(credentials, l_names, cal_name='favs_birthdays')
 ```
-Where `cal` is a Google Calendar object and `cal_id` is its Id.
+, where `cal` is an object and `cal_id` is the ID of the created Calendar (in this case of 'favs_birthdays').
+
+To verify creation of the calendar, just check your [Google Calendar](www.calendar.google.com) or run this script:
+```
+cal.print_cal_list()
+```
+
+
+
+If you would like to delete the newly created calendar just do:  
+```
+cal.delete_cal(cal_id)
+```
+and verify that it is delete with 
+```
+cal.print_cal_list()
+```
+again.  
